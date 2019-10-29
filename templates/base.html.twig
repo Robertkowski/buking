@@ -1,12 +1,49 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-    </head>
-    <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+<html lang="en">
+<head>
+    <title>YourSimplePlan</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% block stylesheets %}
+        <link href="{{ asset('css/base.css') }}" rel="stylesheet"/>
+    {% endblock %}
+    {%  block javascripts %}
+{#        <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>#}
+    {% endblock %}
+</head>
+<body>
+
+<div class="header">
+    <a href="{{ path('home') }}">
+        <img src="{{ absolute_url(asset('images/logo.png')) }}" alt="BUKING"/>
+        <div class="content">
+            <h1>BUKING</h1>
+            <p>Mi casa es su casa</p>
+        </div>
+    </a>
+</div>
+
+<div class="navbar">
+    <a href="{{ path('home') }}">Home</a>
+    <div class="dropdown">
+        <button class="dropbtn">Apartments
+            <i class="fa fa-caret-down"></i>
+        </button>
+        <div class="dropdown-content">
+            <a href="{{ path('apartments') }}">Show all</a>
+            <a href="{{ path('prepare_apartment', {'apartment': 0}) }}">Add new</a>
+        </div>
+    </div>
+    <a href="{{ path('reservation') }}">Reservations</a>
+</div>
+
+<div id="content">
+    {% block body %} {% endblock %}
+</div>
+
+<footer class="footer">
+    <h4>Created by Robert</h4>
+</footer>
+
+</body>
 </html>

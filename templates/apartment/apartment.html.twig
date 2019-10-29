@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 id="newsTitle">Add or edit apartment</h2>
+                <form method="post" action="{{ path('save_apartment') }}">
+                    {% if apartment.id %}
+                        <input type="hidden" name="id" value="{{ apartment.id }}">
+                    {% endif %}
+                    <div class="form-group">
+                        <label for="title">Name:</label>
+                        <input type="text" id="name" name="name" value="{{ apartment.name }}">
+                        <label for="title">Slots:</label>
+                        <input type="number" id="slots" name="slots" value="{{ apartment.slots }}">
+                        <label for="title">Discount over 7 days:</label>
+                        <input type="number" id="discountOverSevenDays" name="discountOverSevenDays" value="{{ apartment.discountOverSevenDays }}">
+                    </div>
+                    <input type="submit" name="Save" value="Save">
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link href="{{ asset('css/apartment.css') }}" rel="stylesheet"/>
+    {% endblock %}
+
+{% endblock %}
