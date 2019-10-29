@@ -6,34 +6,6 @@
         <link href="{{ asset('css/reservation.css') }}" rel="stylesheet"/>
     {% endblock %}
 
-{#    {{ form_start(form) }}#}
-{#    <div class="container">#}
-{#        <div class="row">#}
-{#            <div class="col">#}
-{#                <h2 id="reservationTitle">Create new workout</h2>#}
-{#                <div id="new-workout">#}
-{#                    {{ form_row(form.name) }}#}
-{#                    {{ form_row(form.plan) }}#}
-{#                    {{ form_row(form.creator) }}#}
-{#                    {{ form_row(form.type) }}#}
-{#                </div>#}
-{#                <h3>Intervals</h3>#}
-{#                <ul class="intervals" data-prototype="{{ form_widget(form.intervals.vars.prototype)|e('html_attr') }}">#}
-{#                    {% for interval in form.intervals %}#}
-{#                        <li>{{ form_row(interval.duration) }}#}
-{#                            {{ form_row(interval.type) }}#}
-{#                            {{ form_row(interval.value) }}#}
-{#                            {{ form_row(interval.executionOrder) }}#}
-{#                        </li>#}
-{#                    {% endfor %}#}
-{#                </ul>#}
-{#                {{ form_row(form.save) }}#}
-
-{#            </div>#}
-{#        </div>#}
-{#    </div>#}
-{#    {{ form_end(form) }}#}
-
     <div class="container">
         <h2 id="reservationTitle">Find free apartments</h2>
         {% for apartment in apartments %}
