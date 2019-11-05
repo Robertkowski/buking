@@ -5,7 +5,7 @@
     {% for apartment in apartments %}
 
         <div class="card">
-            <a href="{{ path('prepare_apartment', {'apartment': apartment.id}) }}">
+            <a href="{{ path('edit_apartment', {'apartment': apartment.id}) }}">
                 <h2>{{ apartment.name }}</h2>
             </a>
             <h5>Slots: {{ apartment.slots }}</h5>
@@ -14,9 +14,9 @@
     {% else %}
         <div class="card">
             <h2>No apartments find</h2>
-            <h5>If you want create new apartments click <a href="{{ path('prepare_apartment', {'apartment': 0}) }}">here</a></h5>
+            <h5>If you want create new apartments click <a href="{{ path('new_apartment') }}">here</a></h5>
         </div>
-    {%  endfor %}
+    {% endfor %}
 
     {% block stylesheets %}
         {{ parent() }}

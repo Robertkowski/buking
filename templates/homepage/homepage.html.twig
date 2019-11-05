@@ -1,17 +1,17 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-        <div class="container">
-            <div class="row">
-                    <div class="column-66">
-                        <h1 class="xlarge-font"><b>Book your dream apartment</b></h1>
-                        <h1 class="large-font" style="color: #0f2f57;"><b>Make yourself comfortable</b></h1>
-                        <span style="font-size:36px">Best locations in the world.</span>
-                        <a class="button" href="{{ path('reservation') }}">BOOK NOW!</a>
-                    </div>
-                    <div class="column-33">
-                        <img src="{{ absolute_url(asset('images/book.jpg')) }}" width="335" height="471">
-                    </div>
+    <div class="container">
+        <div class="row">
+            <div class="column-66">
+                <h1 class="xlarge-font"><b>Book your dream apartment</b></h1>
+                <h1 class="large-font" style="color: #0f2f57;"><b>Make yourself comfortable</b></h1>
+                <span style="font-size:36px">Best locations in the world.</span>
+                <a class="button" href="{{ path('reservations') }}">BOOK NOW!</a>
+            </div>
+            <div class="column-33">
+                <img src="{{ absolute_url(asset('images/book.jpg')) }}" width="335" height="471">
             </div>
         </div>
+    </div>
 {% endblock %}

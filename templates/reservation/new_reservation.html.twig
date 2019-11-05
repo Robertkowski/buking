@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    <div class="container">
+        <h2 id="reservationTitle">Find free apartments</h2>
+        {% for apartment in apartments %}
+            <div class="card">
+                <a href="{{ path('edit_apartment', {'apartment': apartment.id}) }}">
+                    <h2>{{ apartment.name }}</h2>
+                </a>
+                <h5>Slots: {{ apartment.slots }}</h5>
+            </div>
+        {% else %}
+            <div>
+                <h2>No apartments find</h2>
+                <h5>If you want us new apartment click here <a href="{{ path('new_apartment') }}">Create
+                        apartment</a>
+                </h5>
+            </div>
+        {% endfor %}
+        {{ form_start(form) }}
+        <div class="col">
+            <h2 id="apartmentTitle">Book apartment</h2>
+            {{ form_row(form.apartment) }}
+            {{ form_row(form.bookingFrom) }}
+            {{ form_row(form.bookingTo) }}
+            {{ form_row(form.takenSlots) }}
+            {{ form_row(form.save) }}
+        </div>
+        {{ form_end(form) }}
+    </div>
+
+    {% block javascripts %}
+        {{ parent() }}
+    {% endblock %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+    {% endblock %}
+
+{% endblock %}

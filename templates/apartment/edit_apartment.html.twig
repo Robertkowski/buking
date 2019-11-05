@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+    {{ form_start(form) }}
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h2 id="trainingTitle">Edit the apartment?</h2>
+                <div id="new-apartment">
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.slots) }}
+                    {{ form_row(form.discountOverSevenDays) }}
+                </div>
+                {{ form_row(form.save) }}
+
+            </div>
+        </div>
+    </div>
+    {{ form_end(form) }}
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link href="{{ asset('css/apartment.css') }}" rel="stylesheet"/>
+    {% endblock %}
+
+{% endblock %}
