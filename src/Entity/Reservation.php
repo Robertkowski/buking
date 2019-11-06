@@ -82,7 +82,7 @@ class Reservation
     /**
      * @return mixed
      */
-    public function getApartment()
+    public function getApartment(): ?Apartment
     {
         return $this->apartment;
     }
@@ -91,7 +91,7 @@ class Reservation
      * @param mixed $apartment
      * @return Reservation
      */
-    public function setApartment($apartment)
+    public function setApartment(?Apartment $apartment): self
     {
         $this->apartment = $apartment;
         return $this;

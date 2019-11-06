@@ -61,7 +61,7 @@ class ApartmentType extends AbstractType
                     new NotNull()
                 ]
             ])
-            ->add('save', SubmitType::class, ['label' => 'Add apartment']);
+            ->add('save', SubmitType::class, ['label' => 'Save apartment']);
     }
 
     public function configureOptions(OptionsResolver $resolver)

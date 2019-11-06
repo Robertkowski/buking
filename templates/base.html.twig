@@ -7,8 +7,8 @@
     {% block stylesheets %}
         <link href="{{ asset('css/base.css') }}" rel="stylesheet"/>
     {% endblock %}
-    {%  block javascripts %}
-{#        <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>#}
+    {% block javascripts %}
+        {#        <script src="{{ asset('js/jquery-3.4.1.min.js') }}"></script>#}
     {% endblock %}
 </head>
 <body>
@@ -36,6 +36,14 @@
     </div>
     <a href="{{ path('reservations') }}">Reservations</a>
 </div>
+
+{% for label, messages in app.flashes %}
+    {% for message in messages %}
+        <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
 
 <div id="content">
     {% block body %} {% endblock %}
