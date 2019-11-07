@@ -11,8 +11,6 @@ class ApartmentService extends AbstractService
     /**
      * @param ApartmentModel $apartmentModel
      * @return Apartment
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function create(ApartmentModel $apartmentModel): Apartment
     {
@@ -27,8 +25,6 @@ class ApartmentService extends AbstractService
      * @param Apartment $apartment
      * @param ApartmentModel $apartmentModel
      * @return Apartment
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      */
     public function update(Apartment $apartment, ApartmentModel $apartmentModel): Apartment
     {
@@ -38,12 +34,19 @@ class ApartmentService extends AbstractService
         return $apartment;
     }
 
+    /**
+     * @return object[]
+     */
     public function getApartmentList()
     {
         $apartments = $this->entityManager->getRepository(Apartment::class)->findAll();
         return $apartments;
     }
 
+    /**
+     * @param Apartment $apartment
+     * @param ApartmentModel $apartmentModel
+     */
     private function setCommonFields(Apartment $apartment, ApartmentModel $apartmentModel)
     {
         $apartment->setName($apartmentModel->name);

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="apartments")
- * @ORM\Entity(repositoryClass="App\Repository\ApartamentRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ApartmentRepository")
  */
 class Apartment
 {
@@ -32,13 +32,16 @@ class Apartment
      */
     private $discountOverSevenDays;
 
+    /**
+     * @return int
+     */
     public function getId(): int
     {
         return $this->id;
     }
 
     /**
-     * @return mixed
+     * @return string
      */
     public function getName(): string
     {
@@ -46,7 +49,7 @@ class Apartment
     }
 
     /**
-     * @param mixed $name
+     * @param string $name
      * @return Apartment
      */
     public function setName(string $name): self
@@ -55,11 +58,18 @@ class Apartment
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getSlots(): int
     {
         return $this->slots;
     }
 
+    /**
+     * @param int $slots
+     * @return $this
+     */
     public function setSlots(int $slots): self
     {
         $this->slots = $slots;
@@ -67,11 +77,18 @@ class Apartment
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getDiscountOverSevenDays(): int
     {
         return $this->discountOverSevenDays;
     }
 
+    /**
+     * @param int $discountOverSevenDays
+     * @return $this
+     */
     public function setDiscountOverSevenDays(int $discountOverSevenDays): self
     {
         $this->discountOverSevenDays = $discountOverSevenDays;

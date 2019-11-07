@@ -3,6 +3,7 @@
 namespace App\Form\Model;
 
 use App\Entity\Apartment;
+use DateTime;
 use Symfony\Component\Validator\Constraints as Assert;
 
 class ReservationModel
@@ -10,13 +11,13 @@ class ReservationModel
 
     /**
      * @Assert\NotNull()
-     * @var \DateTime
+     * @var DateTime
      */
     public $bookingFrom;
 
     /**
      * @Assert\NotNull()
-     * @var \DateTime
+     * @var DateTime
      */
     public $bookingTo;
 

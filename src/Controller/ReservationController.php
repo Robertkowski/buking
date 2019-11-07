@@ -2,15 +2,13 @@
 
 namespace App\Controller;
 
-use App\Entity\Apartment;
-use App\Entity\Reservation;
 use App\Exception\ReservationException;
-use App\Form\Model\ReservationModel;
 use App\Form\ReservationType;
 use App\Service\ApartmentService;
 use App\Service\ReservationService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 
@@ -24,9 +22,7 @@ class ReservationController extends AbstractController
      * @param Request $request
      * @param ReservationService $reservationService
      * @param ApartmentService $apartmentService
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @return Response
      */
     public function prepareApartmentsForNewReservation(Request $request, ReservationService $reservationService, ApartmentService $apartmentService)
     {
@@ -36,7 +32,8 @@ class ReservationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             try {
                 $reservationModel = $form->getData();
-                $message = $reservationService->create($reservationModel);
+                $reservation = $reservationService->create($reservationModel);
+                $message = $reservationService->prepareSuccessMessage($reservation);
                 $this->addFlash('success', $message);
             } catch (ReservationException $e) {
                 $this->addFlash('error', $e->getMessage());

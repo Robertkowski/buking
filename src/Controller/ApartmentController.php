@@ -7,9 +7,9 @@ use App\Form\ApartmentType;
 use App\Form\Model\ApartmentModel;
 use App\Service\ApartmentService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * @Route("/apartments")
@@ -20,7 +20,7 @@ class ApartmentController extends AbstractController
     /**
      * @Route("", name="apartments")
      * @param ApartmentService $apartmentService
-     * @return \Symfony\Component\HttpFoundation\Response
+     * @return Response
      */
     public function showList(ApartmentService $apartmentService)
     {
@@ -34,9 +34,7 @@ class ApartmentController extends AbstractController
      * @Route("/new", name="new_apartment")
      * @param Request $request
      * @param ApartmentService $apartmentService
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @return Response
      */
     public function new(Request $request, ApartmentService $apartmentService)
     {
@@ -57,9 +55,7 @@ class ApartmentController extends AbstractController
      * @param Apartment $apartment
      * @param Request $request
      * @param ApartmentService $apartmentService
-     * @return \Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @return Response
      */
     public function edit(Apartment $apartment, Request $request, ApartmentService $apartmentService)
     {

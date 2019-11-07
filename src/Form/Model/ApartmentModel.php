@@ -27,6 +27,10 @@ class ApartmentModel
      */
     public $discountOverSevenDays;
 
+    /**
+     * @param Apartment $apartment
+     * @return static
+     */
     public static function fromApartment(Apartment $apartment): self
     {
         $apartmentModel = new self();

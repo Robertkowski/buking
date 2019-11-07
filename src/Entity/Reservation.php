@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -43,35 +44,56 @@ class Reservation
         return $this->id;
     }
 
-    public function getBookingFrom(): \DateTime
+    /**
+     * @return DateTime
+     */
+    public function getBookingFrom(): DateTime
     {
         return $this->bookingFrom;
     }
 
-    public function setBookingFrom(\DateTime $bookingFrom): self
+    /**
+     * @param DateTime $bookingFrom
+     * @return $this
+     */
+    public function setBookingFrom(DateTime $bookingFrom): self
     {
         $this->bookingFrom = $bookingFrom;
 
         return $this;
     }
 
-    public function getBookingTo(): \DateTime
+    /**
+     * @return DateTime
+     */
+    public function getBookingTo(): DateTime
     {
         return $this->bookingTo;
     }
 
-    public function setBookingTo(\DateTime $bookingTo): self
+    /**
+     * @param DateTime $bookingTo
+     * @return $this
+     */
+    public function setBookingTo(DateTime $bookingTo): self
     {
         $this->bookingTo = $bookingTo;
 
         return $this;
     }
 
+    /**
+     * @return int
+     */
     public function getTakenSlots(): int
     {
         return $this->takenSlots;
     }
 
+    /**
+     * @param int $takenSlots
+     * @return $this
+     */
     public function setTakenSlots(int $takenSlots): self
     {
         $this->takenSlots = $takenSlots;
@@ -80,7 +102,7 @@ class Reservation
     }
 
     /**
-     * @return mixed
+     * @return Apartment
      */
     public function getApartment(): Apartment
     {
@@ -88,7 +110,7 @@ class Reservation
     }
 
     /**
-     * @param mixed $apartment
+     * @param Apartment $apartment
      * @return Reservation
      */
     public function setApartment(Apartment $apartment): self

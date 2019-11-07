@@ -17,18 +17,23 @@ use Symfony\Component\Validator\Constraints\Regex;
 class ApartmentType extends AbstractType
 {
 
+    /**
+     * @param FormBuilderInterface $builder
+     * @param array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', TextType::class, [
-                'label' => 'Name',
-                'attr' => ['placeholder' => 'Set apartment name'],
-                'constraints' => [
-                    new Regex([
-                        'pattern' => '/^[a-zA-Z0-9 ]+$/',
-                        'message' => 'Apartment name can only contain letters and numbers'
-                    ])
-                ]
-            ])
+            'label' => 'Name',
+            'attr' => ['placeholder' => 'Set apartment name'],
+            'constraints' => [
+                new Regex([
+                    'pattern' => '/^[a-zA-Z0-9 ]+$/',
+                    'message' => 'Apartment name can only contain letters and numbers'
+                ]),
+                new NotNull()
+            ]
+        ])
             ->add('slots', NumberType::class, [
                 'label' => 'Slots',
                 'attr' => [
@@ -39,7 +44,8 @@ class ApartmentType extends AbstractType
                     new GreaterThanOrEqual([
                         'value' => 1,
                         'message' => 'Minimum apartment slot is 1'
-                    ])
+                    ]),
+                    new NotNull()
                 ]
             ])
             ->add('discountOverSevenDays', NumberType::class, [
@@ -64,6 +70,9 @@ class ApartmentType extends AbstractType
             ->add('save', SubmitType::class, ['label' => 'Save apartment']);
     }
 
+    /**
+     * @param OptionsResolver $resolver
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([

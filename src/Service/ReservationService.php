@@ -5,37 +5,36 @@ namespace App\Service;
 use App\Entity\Reservation;
 use App\Exception\ReservationException;
 use App\Form\Model\ReservationModel;
+use DateTime;
 
 class ReservationService extends AbstractService
 {
 
     /**
-     * @param Reservation $model
-     * @return string
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @param ReservationModel $model
+     * @return Reservation
      * @throws ReservationException
      */
-    public function create(ReservationModel $model)
+    public function create(ReservationModel $model): Reservation
     {
-        $response = $this->handleErrors($model);
+        $this->handleErrors($model);
 
-        if (empty($response)) {
-            $reservation = new Reservation();
-            $this->setCommonFields($reservation, $model);
-            $this->saveEntity($reservation);
-            $response = $this->prepareSuccessMessage($reservation);
-        }
+        $reservation = new Reservation();
+        $this->setCommonFields($reservation, $model);
+        $this->saveEntity($reservation);
 
-        return $response;
+        return $reservation;
     }
 
     /**
-     * @param Reservation $reservationModel
+     * @param ReservationModel $reservationModel
      * @throws ReservationException
      */
     private function handleErrors(ReservationModel $reservationModel)
     {
+        if ($reservationModel->bookingFrom < new DateTime('now')) {
+            throw new ReservationException('You are trying to book an apartment with a past date. Please select a different check-in date.');
+        }
         $dateDifference = $reservationModel->bookingFrom->diff($reservationModel->bookingTo);
         if ($dateDifference->invert) {
             throw new ReservationException('Sorry, reservation failed.');
@@ -45,23 +44,26 @@ class ReservationService extends AbstractService
         $sumTakenSlots = $this->entityManager->getRepository(Reservation::class)->getSumTakenSlotsForApartment($apartment, $filters);
         $emptySlots = ($sumTakenSlots + $reservationModel->takenSlots) <= $apartment->getSlots();
         if (!$emptySlots) {
-            throw new ReservationException('Sorry, reservation failed. In this time is not enough space in apartment');
+            throw new ReservationException('Sorry, reservation failed. In this time the apartment is occupied');
         }
     }
 
-    private function prepareSuccessMessage(Reservation $reservation)
+    public function prepareSuccessMessage(Reservation $reservation)
     {
         $apartment = $reservation->getApartment();
         $dateDifference = $reservation->getBookingFrom()->diff($reservation->getBookingTo());
         $discount = $dateDifference->format('%a') >= 7 ? $apartment->getDiscountOverSevenDays() : false;
+        $message = 'The apartment reservation was successful.';
         if ($discount) {
-            $message = 'The apartment reservation was successful. Your discount is ' . $discount . '%';
-        } else {
-            $message = 'The apartment reservation was successful.';
+            $message .= ' Your discount is ' . $discount . '%';
         }
         return $message;
     }
 
+    /**
+     * @param Reservation $reservation
+     * @param ReservationModel $model
+     */
     private function setCommonFields(Reservation $reservation, ReservationModel $model)
     {
         $reservation->setApartment($model->apartment);
