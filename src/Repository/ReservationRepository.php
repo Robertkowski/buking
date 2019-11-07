@@ -20,6 +20,12 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
+    /**
+     * @param Apartment $apartment
+     * @param $filters
+     * @return mixed
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
     public function getSumTakenSlotsForApartment(Apartment $apartment, $filters)
     {
         return $this->createQueryBuilder('r')

@@ -38,12 +38,12 @@ class Reservation
      */
     private $apartment;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
 
-    public function getBookingFrom(): ?\DateTime
+    public function getBookingFrom(): \DateTime
     {
         return $this->bookingFrom;
     }
@@ -55,7 +55,7 @@ class Reservation
         return $this;
     }
 
-    public function getBookingTo(): ?\DateTime
+    public function getBookingTo(): \DateTime
     {
         return $this->bookingTo;
     }
@@ -67,7 +67,7 @@ class Reservation
         return $this;
     }
 
-    public function getTakenSlots(): ?int
+    public function getTakenSlots(): int
     {
         return $this->takenSlots;
     }
@@ -82,7 +82,7 @@ class Reservation
     /**
      * @return mixed
      */
-    public function getApartment(): ?Apartment
+    public function getApartment(): Apartment
     {
         return $this->apartment;
     }
@@ -91,7 +91,7 @@ class Reservation
      * @param mixed $apartment
      * @return Reservation
      */
-    public function setApartment(?Apartment $apartment): self
+    public function setApartment(Apartment $apartment): self
     {
         $this->apartment = $apartment;
         return $this;

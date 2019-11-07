@@ -3,7 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Apartment;
-use App\Entity\Reservation;
+use App\Form\Model\ReservationModel;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
@@ -51,7 +51,7 @@ class ReservationType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => Reservation::class,
+            'data_class' => ReservationModel::class,
         ]);
     }
 

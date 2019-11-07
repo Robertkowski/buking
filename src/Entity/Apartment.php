@@ -32,7 +32,7 @@ class Apartment
      */
     private $discountOverSevenDays;
 
-    public function getId(): ?int
+    public function getId(): int
     {
         return $this->id;
     }
@@ -40,7 +40,7 @@ class Apartment
     /**
      * @return mixed
      */
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }
@@ -49,13 +49,13 @@ class Apartment
      * @param mixed $name
      * @return Apartment
      */
-    public function setName($name)
+    public function setName(string $name): self
     {
         $this->name = $name;
         return $this;
     }
 
-    public function getSlots(): ?int
+    public function getSlots(): int
     {
         return $this->slots;
     }
@@ -67,7 +67,7 @@ class Apartment
         return $this;
     }
 
-    public function getDiscountOverSevenDays(): ?int
+    public function getDiscountOverSevenDays(): int
     {
         return $this->discountOverSevenDays;
     }

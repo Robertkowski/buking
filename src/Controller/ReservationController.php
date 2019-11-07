@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Apartment;
 use App\Entity\Reservation;
 use App\Exception\ReservationException;
+use App\Form\Model\ReservationModel;
 use App\Form\ReservationType;
 use App\Service\ApartmentService;
 use App\Service\ReservationService;
@@ -29,19 +30,19 @@ class ReservationController extends AbstractController
      */
     public function prepareApartmentsForNewReservation(Request $request, ReservationService $reservationService, ApartmentService $apartmentService)
     {
-        $reservation = new Reservation();
-
-        $form = $this->createForm(ReservationType::class, $reservation);
+        $form = $this->createForm(ReservationType::class);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
             try {
-                $reservation = $form->getData();
-                $message = $reservationService->create($reservation);
+                $reservationModel = $form->getData();
+                $message = $reservationService->create($reservationModel);
                 $this->addFlash('success', $message);
             } catch (ReservationException $e) {
                 $this->addFlash('error', $e->getMessage());
             }
         }
+
         $apartments = $apartmentService->getApartmentList();
         return $this->render('reservation/new_reservation.html.twig', [
             'apartments' => $apartments, 'form' => $form->createView()
